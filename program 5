@@ -1,0 +1,26 @@
+from datetime import datetime
+
+issuer = input("Enter Issuer Name: ")
+subject = input("Enter Subject Name: ")
+valid_from = input("Enter Valid From Date (YYYY-MM-DD): ")
+valid_to = input("Enter Valid To Date (YYYY-MM-DD): ")
+public_key = input("Enter Public Key: ")
+
+print("\n----- Certificate Details -----")
+print("Issuer:", issuer)
+print("Subject:", subject)
+print("Valid From:", valid_from)
+print("Valid To:", valid_to)
+print("Public Key:", public_key)
+
+current_date = datetime.now().date()
+
+start_date = datetime.strptime(valid_from, "%Y-%m-%d").date()
+end_date = datetime.strptime(valid_to, "%Y-%m-%d").date()
+
+print("\n----- Validation Result -----")
+
+if start_date <= current_date <= end_date:
+    print("Certificate is Valid and Trustworthy.")
+else:
+    print("Certificate has Expired or is Not Yet Valid.")
