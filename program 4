@@ -1,0 +1,36 @@
+import time
+import secrets
+
+class Kerberos:
+    def __init__(self):
+        self.ticket_db = {}
+
+    def generate_ticket(self, user):
+        ticket = secrets.token_hex(8)
+        timestamp = time.time()
+
+        self.ticket_db[ticket] = timestamp
+
+        print(f"Ticket Issued for {user}: {ticket}")
+        return ticket
+
+    def validate_ticket(self, ticket):
+        if ticket in self.ticket_db:
+            current_time = time.time()
+            issue_time = self.ticket_db[ticket]
+
+            if current_time - issue_time < 60:
+                print("Ticket Valid.")
+            else:
+                print("Ticket Expired.")
+        else:
+            print("Invalid Ticket.")
+
+server = Kerberos()
+
+user = input("Enter username: ")
+
+ticket = server.generate_ticket(user)
+
+print("\nValidating Ticket...")
+server.validate_ticket(ticket)
