@@ -1,0 +1,19 @@
+import hashlib
+
+message = input("Enter message: ")
+
+# Create a digital signature (hash)
+signature = hashlib.sha256(message.encode()).hexdigest()
+
+print("\nGenerated Signature:")
+print(signature)
+
+# Verification
+verify_message = input("\nEnter message for verification: ")
+
+verify_signature = hashlib.sha256(verify_message.encode()).hexdigest()
+
+if signature == verify_signature:
+    print("Signature Verified Successfully.")
+else:
+    print("Verification Failed.")
