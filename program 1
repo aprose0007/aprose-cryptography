@@ -1,0 +1,29 @@
+import hashlib
+import time
+
+data = input("Enter data to hash: ")
+
+# MD5
+start = time.time()
+md5_hash = hashlib.md5(data.encode()).hexdigest()
+md5_time = time.time() - start
+
+# SHA-256
+start = time.time()
+sha256_hash = hashlib.sha256(data.encode()).hexdigest()
+sha256_time = time.time() - start
+
+print("\nMD5 Hash:")
+print(md5_hash)
+
+print("\nSHA-256 Hash:")
+print(sha256_hash)
+
+print("\nPerformance Comparison:")
+print(f"MD5 Time: {md5_time:.10f} seconds")
+print(f"SHA-256 Time: {sha256_time:.10f} seconds")
+
+if md5_time < sha256_time:
+    print("MD5 is faster.")
+else:
+    print("SHA-256 is faster.")
